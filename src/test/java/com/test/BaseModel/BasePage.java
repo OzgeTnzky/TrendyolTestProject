@@ -46,24 +46,29 @@ public class BasePage {
         findElement(by).click();
     }
 
-    public String getAttribute(WebElement element){
+    public String getBoutiqueAttribute(WebElement element){
 
         return element.getAttribute("alt");
+    }
+
+    public String getProductAttribute(WebElement element){
+
+        return element.getAttribute("title");
     }
 
     public void productPageLoad(By by) throws InterruptedException {
         List<WebElement> element = null;
         int beforeLoading = driver.findElements(by).size();
         int afterLoading = 0;
-        while(beforeLoading!=afterLoading && afterLoading < 1000){
+        while(beforeLoading!=afterLoading && beforeLoading > 5){
             element = driver.findElements(by);
             beforeLoading = driver.findElements(by).size();
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",element.get(element.size()-1));
-            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",element.get(element.size()-10));
-            Thread.sleep(2000);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",element.get(element.size()-5));
+            Thread.sleep(1000);
+            ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
             afterLoading = driver.findElements(by).size();
         }
-        ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, 0)");
     }
 
     public void boutiquePageLoad(By by) throws InterruptedException {
@@ -72,7 +77,7 @@ public class BasePage {
         int afterLoading = 0;
         while(beforeLoading!=afterLoading){
             beforeLoading = driver.findElements(by).size();
-            Thread.sleep(500);
+            Thread.sleep(1000);
             afterLoading = driver.findElements(by).size();
         }
         ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, 0)");
@@ -83,7 +88,16 @@ public class BasePage {
         logger.info(lists.size());
         if(driver.findElements(by).size()!=0){
             for( WebElement list : lists)
-            logger.error("İmajı olmayan butikler:" + getAttribute(list));
+            logger.error("İmajı olmayan butikler:" + getBoutiqueAttribute(list));
+        }
+    }
+
+    public void isProductExist(By by){
+        List<WebElement> lists = driver.findElements(by);
+        logger.info(lists.size());
+        if(driver.findElements(by).size()!=0){
+            for( WebElement list : lists)
+                logger.error("İmajı olmayan ürünler:" + getProductAttribute(list));
         }
     }
 

@@ -20,7 +20,7 @@ public class PageConstant {
     public static By BOUTIQUES = By.xpath("//span[contains(@class,'image-container')]/img");
     public static By PRODUCTS = By.xpath("//div[contains(@class,'image-container')]");
     public static By PLACE_HOLDER = By.xpath("//img[contains(@src,'boutique_placeholder')]");
-    public static By PRODUCTS_PLACE_HOLDER = By.xpath("//img[contains(@src,'defaultThumb')]");
+    public static By PRODUCTS_PLACE_HOLDER = By.xpath("//img[contains(@src,'defaultThumb')]/../../..");
     public static By ADD_BASKET = By.xpath("//div[contains(@class,'prc-inf-wrp')]");
     public static By BASKET = By.xpath("//a[contains(@class,'account-basket')]");
 }

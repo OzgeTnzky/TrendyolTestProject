@@ -14,7 +14,7 @@ public class AddToBasket extends BasePage {
 
         selectBoutique(BOUTIQUES);
         productPageLoad(PRODUCTS);
-        isElementExist(PRODUCTS_PLACE_HOLDER);
+        isProductExist(PRODUCTS_PLACE_HOLDER);
         selectBoutique(PRODUCTS);
         clickElement(ADD_BASKET);
         clickElement(BASKET);
